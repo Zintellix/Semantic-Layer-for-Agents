@@ -1,0 +1,35 @@
+# Sales pack — B2B pipeline. Opportunity is the primary object.
+- object_type: Account
+  pack: sales
+  primary_key: account_id
+  title_property: name
+  datasource: sqlite.accounts
+  properties:
+    name: { type: string, source: accounts.name }
+    tier: { type: string, source: accounts.tier }
+
+- object_type: SalesRep
+  pack: sales
+  primary_key: rep_id
+  title_property: name
+  datasource: sqlite.sales_reps
+  properties:
+    name:  { type: string, source: sales_reps.name }
+    quota: { type: money,  source: sales_reps.quota }
+  links:
+    owns: { to: Opportunity, cardinality: "1:N", join: [rep_id] }
+
+- object_type: Opportunity
+  pack: sales
+  primary_key: opportunity_id
+  title_property: name
+  datasource: sqlite.opportunities
+  properties:
+    name:              { type: string, source: opportunities.name }
+    stage:             { type: string, source: opportunities.stage }
+    amount:            { type: money,  source: opportunities.amount }
+    probability:       { type: number, source: opportunities.probability }
+    days_to_close:     { type: number, source: opportunities.days_to_close }
+    weighted_pipeline: { type: money,  function: fn.weighted_pipeline }
+  links:
+    for_account: { to: Account, cardinality: "1:N", join: [account_id] }

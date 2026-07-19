@@ -1,0 +1,8 @@
+# Cosmetics pack — event types. Severity lives in the PACK, never in the agent.
+- event_type: StockoutRiskDetected
+  object_type: CosmeticsVariant
+  severity_rules:
+    - when: "fn.hero_shades contains $variant"   # hero-shade stockout is always critical
+      severity: CRITICAL
+    - default: true
+      severity: HIGH

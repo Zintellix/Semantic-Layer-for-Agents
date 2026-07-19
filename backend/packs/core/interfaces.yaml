@@ -1,0 +1,5 @@
+# Core pack — interfaces. Contracts an object type can implement.
+- name: SellableItem
+  properties: [sku, price, revenue_28d]
+- name: InventoryDimension
+  properties: [on_hand, avg_daily_units_7d]

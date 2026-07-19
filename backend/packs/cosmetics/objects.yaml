@@ -1,0 +1,21 @@
+# Cosmetics pack — CosmeticsVariant extends Variant, implements SellableItem.
+- object_type: CosmeticsVariant
+  pack: cosmetics
+  extends: Variant
+  implements: [SellableItem]
+  verticals: [cosmetics]
+  primary_key: variant_id
+  title_property: display_title
+  datasource: sqlite.variants
+  properties:
+    display_title:      { type: string, source: variants.display_title }
+    sku:                { type: string, source: variants.sku }
+    shade:              { type: string, source: variants.shade }
+    undertone:          { type: string, source: variants.undertone }
+    price:              { type: money,  source: variants.price }
+    cost:               { type: money,  source: variants.cost }
+    revenue_28d:        { type: money,  source: variants.revenue_28d }
+    days_of_stock:      { type: number, function: fn.days_of_stock }
+    lead_time_coverage: { type: number, function: fn.lead_time_coverage }
+  links:
+    stocked_at: { to: InventoryPosition, cardinality: "1:N", join: [variant_id] }

@@ -1,0 +1,36 @@
+# Core pack — object types. Vertical-neutral spine.
+- object_type: Product
+  pack: core
+  primary_key: product_id
+  title_property: title
+  datasource: sqlite.products
+  properties:
+    title:     { type: string, source: products.title }
+    franchise: { type: string, source: products.franchise }
+  links:
+    has_variant: { to: Variant, cardinality: "1:N", join: [product_id] }
+
+- object_type: Variant
+  pack: core
+  primary_key: variant_id
+  implements: [SellableItem]
+  title_property: sku
+  datasource: sqlite.variants
+  properties:
+    sku:         { type: string, source: variants.sku }
+    price:       { type: money,  source: variants.price }
+    cost:        { type: money,  source: variants.cost }
+    revenue_28d: { type: money,  source: variants.revenue_28d }
+  links:
+    stocked_at: { to: InventoryPosition, cardinality: "1:N", join: [variant_id] }
+
+- object_type: InventoryPosition
+  pack: core
+  primary_key: position_id
+  implements: [InventoryDimension]
+  title_property: location_id
+  datasource: sqlite.inventory_positions
+  properties:
+    location_id:         { type: string, source: inventory_positions.location_id }
+    on_hand:             { type: number, source: inventory_positions.on_hand }
+    avg_daily_units_7d:  { type: number, source: inventory_positions.avg_daily_units_7d }

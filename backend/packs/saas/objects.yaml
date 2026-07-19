@@ -1,0 +1,14 @@
+# SaaS pack — renewals / churn. RenewalAccount is the primary object.
+- object_type: RenewalAccount
+  pack: saas
+  primary_key: account_id
+  title_property: name
+  datasource: sqlite.renewal_accounts
+  properties:
+    name:                { type: string, source: renewal_accounts.name }
+    segment:             { type: string, source: renewal_accounts.segment }
+    arr:                 { type: money,  source: renewal_accounts.arr }
+    health_score:        { type: number, source: renewal_accounts.health_score }
+    renewal_probability: { type: number, source: renewal_accounts.renewal_probability }
+    days_to_renewal:     { type: number, source: renewal_accounts.days_to_renewal }
+    arr_at_risk:         { type: money,  function: fn.arr_at_risk }

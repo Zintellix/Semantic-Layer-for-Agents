@@ -1,0 +1,5 @@
+- link_type: on_channel
+  from_type: Campaign
+  to_type: Channel
+  cardinality: "1:N"
+  join: [channel_id]

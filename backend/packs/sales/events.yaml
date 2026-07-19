@@ -1,0 +1,7 @@
+- event_type: SlippageRiskDetected
+  object_type: Opportunity
+  severity_rules:
+    - when: "fn.top_deals contains $opportunity"
+      severity: CRITICAL
+    - default: true
+      severity: HIGH

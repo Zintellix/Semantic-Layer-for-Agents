@@ -1,0 +1,23 @@
+# Derived — ARR exposed to churn = ARR × (1 − renewal probability).
+- function_id: fn.arr_at_risk
+  returns: money
+  kind: derived
+  inputs: [arr, renewal_probability]
+  formula: "arr * (1 - renewal_probability)"
+  tests:
+    - inputs: { arr: 1000000, renewal_probability: 0.7 }
+      expect: 300000
+      tol: 0.01
+
+# Object set — the three largest accounts by ARR.
+- function_id: fn.top_accounts
+  returns: object_set
+  kind: object_set
+  params: { object_type: RenewalAccount, top_n: 3, rank_by: arr }
+  tests:
+    - expect_ids: ["ACC-1", "ACC-2", "ACC-3"]
+
+- function_id: fn.is_top_account
+  returns: classification
+  kind: decision
+  params: { membership_of: fn.top_accounts }

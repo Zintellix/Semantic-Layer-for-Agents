@@ -1,0 +1,24 @@
+# Derived — risk-weighted pipeline value of a deal.
+- function_id: fn.weighted_pipeline
+  returns: money
+  kind: derived
+  inputs: [amount, probability]
+  formula: "amount * probability"
+  tests:
+    - inputs: { amount: 100000, probability: 0.5 }
+      expect: 50000
+      tol: 0.01
+
+# Object set — the three biggest open deals by contract value.
+- function_id: fn.top_deals
+  returns: object_set
+  kind: object_set
+  params: { object_type: Opportunity, top_n: 3, rank_by: amount }
+  tests:
+    - expect_ids: ["OPP-1", "OPP-2", "OPP-3"]
+
+# Decision — is this a top deal? Drives severity + the escalation guard.
+- function_id: fn.is_top_deal
+  returns: classification
+  kind: decision
+  params: { membership_of: fn.top_deals }

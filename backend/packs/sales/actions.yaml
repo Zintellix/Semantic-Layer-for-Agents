@@ -1,0 +1,20 @@
+- action_type: escalate_deal
+  object_type: Opportunity
+  tier: 1
+  reversibility: "N/A"
+  parameters:
+    urgency_days: { type: number, min: 1, max: 90 }
+  guards:
+    - fn.is_top_deal          # only top deals get an escalation card
+  connector_write: none
+  rollback: null
+
+- action_type: flag_for_review
+  object_type: Opportunity
+  tier: 0
+  reversibility: REVERSIBLE
+  parameters:
+    reason: { type: string }
+  guards: []
+  connector_write: none
+  rollback: null

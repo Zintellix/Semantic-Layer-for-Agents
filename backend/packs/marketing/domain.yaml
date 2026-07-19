@@ -1,0 +1,27 @@
+domain: marketing
+label: "Marketing · Budgets"
+flagship: "Which top campaigns will exhaust their budget before the promo peak?"
+signal_type: BUDGET_OVERRUN
+samples:
+  - "Which top campaigns will exhaust their budget before the promo peak?"
+  - "How much runway do our biggest campaigns have before the promo?"
+primary_type: Campaign
+object_set: fn.top_campaigns
+prefetch:
+  member_props: [name, spend_28d, budget_remaining, daily_spend, roas, days_of_budget]
+metric:
+  mode: timeline
+  level: budget_remaining
+  rate: daily_spend
+  window: PromoPeak
+  unit: "₹"
+  event_noun: budget exhaustion
+action:
+  action_type: prioritise_campaign_budget
+  param: urgency_days
+  param_mode: window_start
+aliases:
+  object_sets:
+    fn.top_campaigns: ["top campaigns", "biggest campaigns", "hero campaigns"]
+  windows:
+    PromoPeak: ["promo peak", "promo", "sale peak", "campaign peak"]

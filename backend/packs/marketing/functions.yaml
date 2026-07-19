@@ -1,0 +1,23 @@
+# Derived — days of runway at the current burn rate.
+- function_id: fn.days_of_budget
+  returns: number
+  kind: derived
+  inputs: [budget_remaining, daily_spend]
+  formula: "budget_remaining / daily_spend"
+  tests:
+    - inputs: { budget_remaining: 100000, daily_spend: 5000 }
+      expect: 20
+      tol: 0.01
+
+# Object set — the three biggest campaigns by 28-day spend.
+- function_id: fn.top_campaigns
+  returns: object_set
+  kind: object_set
+  params: { object_type: Campaign, top_n: 3, rank_by: spend_28d }
+  tests:
+    - expect_ids: ["CMP-1", "CMP-2", "CMP-3"]
+
+- function_id: fn.is_top_campaign
+  returns: classification
+  kind: decision
+  params: { membership_of: fn.top_campaigns }
