@@ -1,7 +1,0 @@
-# Cosmetics pack — link types. Re-declares stocked_at from the CosmeticsVariant
-# subtype so the traversal graph is complete for the extended type.
-- link_type: stocked_at
-  from_type: CosmeticsVariant
-  to_type: InventoryPosition
-  cardinality: "1:N"
-  join: [variant_id]

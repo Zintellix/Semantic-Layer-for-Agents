@@ -1,0 +1,9 @@
+- action_type: update_employee_title
+  object_type: Employee
+  tier: 1
+  reversibility: REVERSIBLE
+  parameters:
+    new_title: { type: string }
+  guards: []
+  connector_write: mock_hris
+  rollback: restore_previous_title

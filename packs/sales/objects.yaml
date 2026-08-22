@@ -1,0 +1,36 @@
+- object_type: Account
+  pack: sales
+  primary_key: account_id
+  title_property: name
+  datasource: sqlite.accounts
+  properties:
+    name: { type: string, source: accounts.name }
+    industry: { type: string, source: accounts.industry }
+    annual_revenue: { type: number, source: accounts.annual_revenue }
+  links:
+    has_deals: { to: Deal, cardinality: "1:N", join: [account_id] }
+
+- object_type: Deal
+  pack: sales
+  primary_key: deal_id
+  title_property: title
+  datasource: sqlite.deals
+  roles_allowed: ["admin", "sales_rep"]
+  properties:
+    title: { type: string, source: deals.title }
+    amount: { type: number, source: deals.amount }
+    stage: { type: string, source: deals.stage }
+  links:
+    belongs_to_account: { to: Account, cardinality: "N:1", join: [account_id] }
+    managed_by: { to: SalesRep, cardinality: "N:1", join: [rep_id] }
+
+- object_type: SalesRep
+  pack: sales
+  primary_key: rep_id
+  title_property: name
+  datasource: sqlite.sales_reps
+  properties:
+    name: { type: string, source: sales_reps.name }
+    quota: { type: number, source: sales_reps.quota }
+  links:
+    manages_deals: { to: Deal, cardinality: "1:N", join: [rep_id] }

@@ -1,0 +1,7 @@
+- function_id: fn.top_deals
+  returns: object_set
+  kind: object_set
+  params:
+    object_type: Deal
+    rank_by: amount
+    top_n: 10

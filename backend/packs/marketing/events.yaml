@@ -1,7 +1,0 @@
-- event_type: BudgetOverrunDetected
-  object_type: Campaign
-  severity_rules:
-    - when: "fn.top_campaigns contains $campaign"
-      severity: CRITICAL
-    - default: true
-      severity: HIGH

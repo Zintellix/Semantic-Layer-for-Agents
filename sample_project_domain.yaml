@@ -1,0 +1,30 @@
+# ============================================================
+# Sample: Project Management Domain Pack
+# ============================================================
+# Save this entire file as packs/projects/objects.yaml
+# Then create a domain.yaml in the same folder.
+# Upload both through the dashboard to hot-load this domain!
+
+- object_type: Project
+  pack: projects
+  primary_key: project_id
+  title_property: name
+  datasource: sqlite.projects
+  properties:
+    name: { type: string, source: projects.name }
+    status: { type: string, source: projects.status }
+    budget: { type: number, source: projects.budget }
+  links:
+    has_tasks: { to: Task, cardinality: "1:N", join: [project_id] }
+
+- object_type: Task
+  pack: projects
+  primary_key: task_id
+  title_property: title
+  datasource: sqlite.tasks
+  properties:
+    title: { type: string, source: tasks.title }
+    priority: { type: string, source: tasks.priority }
+    hours_estimate: { type: number, source: tasks.hours_estimate }
+  links:
+    belongs_to_project: { to: Project, cardinality: "N:1", join: [project_id] }

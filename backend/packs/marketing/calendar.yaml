@@ -1,5 +1,0 @@
-- window: PromoPeak
-  starts_in_days: 12
-  duration_days: 14
-  expected_uplift_pct: 60
-  aliases: ["promo peak", "promo", "sale peak", "campaign peak"]

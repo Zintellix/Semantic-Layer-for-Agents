@@ -1,8 +1,0 @@
-# Zintellix Semantic Layer — POC backend
-pyyaml>=6.0          # L1/L2 pack authoring format
-chromadb>=1.5        # L6 resolver semantic rung (vector store)
-openai>=1.40         # L10 agent (OpenAI); optional — offline fallback if no key
-anthropic>=0.60      # L10 agent (Claude) alternative; optional
-fastapi>=0.110       # REST surface for the UI
-uvicorn[standard]>=0.27
-pytest>=8.0          # L2 function contracts + the §8 test plan

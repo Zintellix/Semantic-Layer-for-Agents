@@ -1,0 +1,23 @@
+- object_type: Employee
+  pack: hr
+  primary_key: emp_id
+  title_property: name
+  datasource: sqlite.employees
+  roles_allowed: ["admin", "hr_manager"]
+  properties:
+    name: { type: string, source: employees.name }
+    title: { type: string, source: employees.title }
+    salary: { type: number, source: employees.salary }
+  links:
+    works_in: { to: Department, cardinality: "N:1", join: [dept_id] }
+
+- object_type: Department
+  pack: hr
+  primary_key: dept_id
+  title_property: dept_name
+  datasource: sqlite.departments
+  properties:
+    dept_name: { type: string, source: departments.dept_name }
+    budget: { type: number, source: departments.budget }
+  links:
+    has_employees: { to: Employee, cardinality: "1:N", join: [dept_id] }

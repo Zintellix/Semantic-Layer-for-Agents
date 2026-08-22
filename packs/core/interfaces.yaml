@@ -1,0 +1,10 @@
+# Core pack — interfaces. Contracts an object type can implement.
+- name: SellableItem
+  properties: [sku, price, revenue_28d]
+- name: InventoryDimension
+  properties: [on_hand, avg_daily_units_7d]
+- name: DemandDriver
+  properties: [spend, attributed_revenue, roas]
+- name: ReplenishableUnit
+  properties: [reorder_lead_days, repurchase_cycle_days, subscription_eligible]
+

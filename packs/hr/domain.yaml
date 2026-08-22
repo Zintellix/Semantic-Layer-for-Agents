@@ -1,0 +1,37 @@
+domain: hr
+label: Human Resources
+flagship: "What is the total salary expenditure by department?"
+primary_type: Employee
+object_set: "fn.all_employees"
+signal_type: "HR_ALERT"
+
+prefetch:
+  traverse: works_in
+  target_type: Department
+  member_props: [name, title, salary]
+  target_props: [dept_name, budget]
+
+metric:
+  mode: aggregate
+  unit: "$"
+  value: salary
+  threshold: 500000
+  threshold_label: "salary budget"
+  direction: at_most
+  event_noun: "budget overrun"
+
+action:
+  action_type: update_employee_title
+  param: new_title
+  param_mode: one
+
+samples:
+  - "Show me all employees"
+  - "What is the total salary cost?"
+  - "Which department has the highest budget?"
+  - "List employees in Engineering"
+
+aliases:
+  object_sets:
+    fn.all_employees: ["all employees", "staff", "team members", "workforce"]
+  windows: {}

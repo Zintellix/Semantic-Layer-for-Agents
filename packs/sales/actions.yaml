@@ -1,0 +1,9 @@
+- action_type: update_deal_stage
+  object_type: Deal
+  tier: 1
+  reversibility: REVERSIBLE
+  parameters:
+    new_stage: { type: string }
+  guards: []
+  connector_write: mock_salesforce
+  rollback: restore_previous_stage

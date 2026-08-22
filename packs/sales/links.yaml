@@ -1,0 +1,23 @@
+- link_type: has_deals
+  from_type: Account
+  to_type: Deal
+  cardinality: "1:N"
+  join: [account_id]
+
+- link_type: belongs_to_account
+  from_type: Deal
+  to_type: Account
+  cardinality: "N:1"
+  join: [account_id]
+
+- link_type: managed_by
+  from_type: Deal
+  to_type: SalesRep
+  cardinality: "N:1"
+  join: [rep_id]
+
+- link_type: manages_deals
+  from_type: SalesRep
+  to_type: Deal
+  cardinality: "1:N"
+  join: [rep_id]

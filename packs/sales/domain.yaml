@@ -1,0 +1,37 @@
+domain: sales
+label: B2B Sales Operations
+flagship: "Which deals are at risk of slipping this quarter?"
+primary_type: Deal
+object_set: "fn.top_deals"
+signal_type: "DEAL_RISK"
+
+prefetch:
+  traverse: belongs_to_account
+  target_type: Account
+  member_props: [title, amount, stage]
+  target_props: [name, industry, annual_revenue]
+
+metric:
+  mode: aggregate
+  unit: "$"
+  value: amount
+  threshold: 1000000
+  threshold_label: "quarterly target"
+  direction: at_least
+  event_noun: "pipeline gap"
+
+action:
+  action_type: update_deal_stage
+  param: new_stage
+  param_mode: one
+
+samples:
+  - "Show me all deals in negotiation stage"
+  - "Which accounts have the highest revenue?"
+  - "What is our total pipeline value?"
+  - "Which sales rep manages the most deals?"
+
+aliases:
+  object_sets:
+    fn.top_deals: ["top deals", "best deals", "largest deals", "biggest deals"]
+  windows: {}

@@ -1,7 +1,0 @@
-- event_type: ChurnRiskDetected
-  object_type: RenewalAccount
-  severity_rules:
-    - when: "fn.top_accounts contains $account"
-      severity: CRITICAL
-    - default: true
-      severity: HIGH

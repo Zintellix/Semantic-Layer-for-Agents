@@ -1,6 +1,0 @@
-# Cosmetics pack — seasonal calendar windows.
-- window: GiftingPeak
-  starts_in_days: 18
-  duration_days: 21
-  expected_uplift_pct: 45
-  aliases: ["gifting peak", "gifting season", "gifting"]

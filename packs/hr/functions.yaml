@@ -1,0 +1,7 @@
+- function_id: fn.all_employees
+  returns: object_set
+  kind: object_set
+  params:
+    object_type: Employee
+    rank_by: salary
+    top_n: 100
