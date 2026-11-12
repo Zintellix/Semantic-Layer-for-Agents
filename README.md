@@ -1,4 +1,4 @@
-# 🕸️ Zintellix — Semantic Layer for AI Agents
+# 🕸️ Zintellix — AI Agent Context Infrastructure
 
 > **An ontology-driven, domain-agnostic semantic layer that turns raw database tables into a governed knowledge graph — with plug-and-play AI agent support.**
 
